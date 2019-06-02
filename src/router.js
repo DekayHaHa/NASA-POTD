@@ -1,16 +1,15 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import Calendar from './components/Calendar'
 import Day from './components/Day'
-Vue.use(Router)
+Vue.use(VueRouter)
 
-const router = new Router({
+
+
+const router = new VueRouter({
   routes: [
     {
       path: '/',
-    },
-    {
-      path: '/calendar',
       name: 'calendar',
       component: Calendar
     },
