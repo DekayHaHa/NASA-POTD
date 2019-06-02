@@ -2,7 +2,7 @@
   <section>
     <h2>I'm the calendar</h2>
     <div v-for="day in days" :key="day.date">
-      <div>
+      <div v-on:click="(day) => renderDay(day)">
         <h3>{{day.date}}</h3>
         <img v-if="day.type === 'image'" :src="day.url" width="250px">
         <a v-else :href="day.url">Link to {{day.type}}</a>
@@ -33,6 +33,10 @@ export default {
     }
   },
   methods: {
+    renderDay(day) {
+      console.log(day);
+      this.$router.push({ name: "day", params: { id: day.date } });
+    },
     getPicInfo(year, month, day) {
       axios({
         method: "GET",
