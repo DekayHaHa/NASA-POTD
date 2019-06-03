@@ -4,30 +4,61 @@
       <router-link to="/">
         <h1>NASA PICTURES BY DAY</h1>
       </router-link>
+      <router-link to="/favorites">Vue Favs</router-link>
     </div>
-    <router-view v-bind:saveFav="saveFav" v-bind:favorites="favorites"/>
+    <router-view
+      v-bind:handleFav="handleFav"
+      v-bind:favorites="favorites"
+      v-bind:currentMonth="currentMonth"
+    />
   </div>
 </template>
 
  <script>
 export default {
   mounted() {
-    const oldFavs = JSON.parse(localStorage.getItem("favoriteDates"));
-    if (oldFavs) {
-      this.favorites = oldFavs;
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const months = [
+      "Januaray",
+      "Febuaray",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    this.currentMonth = months.find((mnth, ind) => ind == month - 1);
+    const savedFavs = JSON.parse(localStorage.getItem("favoriteDates"));
+    if (savedFavs && today.getMonth() + 1 == savedFavs.monthSaved) {
+      return (this.favorites = savedFavs);
+    } else if (savedFavs && savedFavs.monthSaved != this.currentMonth) {
+      localStorage.removeItem("favoriteDates");
     }
   },
   data() {
     return {
-      favorites: []
+      favorites: {
+        monthSaved: "",
+        days: []
+      },
+      currentMonth: ""
     };
   },
   methods: {
-    saveFav: function(day) {
-      if (!this.favorites.includes(day)) {
-        this.favorites.push(day);
-        localStorage.setItem("favoriteDates", JSON.stringify(this.favorites));
+    handleFav: function(day) {
+      this.favorites.monthSaved = this.currentMonth;
+      if (!this.favorites.days.includes(day)) {
+        this.favorites.days.push(day);
+      } else {
+        this.favorites.days = this.favorites.days.filter(fav => fav != day);
       }
+      localStorage.setItem("favoriteDates", JSON.stringify(this.favorites));
     }
   }
 };
