@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>I'm the calendar</h2>
+    <h2>Pick a day for {{currentMonth}}</h2>
     <div v-for="date in dates" :key="date.day">
       <div v-on:click="() => renderDay(date)">
         <h3>{{date.day}}</h3>
@@ -13,7 +13,8 @@
 export default {
   name: "calendar",
   props: {
-    favorites: Array
+    favorites: Object,
+    currentMonth: String
   },
   data() {
     return {

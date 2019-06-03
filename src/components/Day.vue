@@ -2,7 +2,7 @@
   <div>
     <h3>{{ title }}</h3>
     <p>{{ date }}</p>
-    <button type="button" @click="saveFav({day, month, year})">Favorite</button>
+    <button type="button" @click="handleFav(day)">Favorite</button>
     <img :src="url">
     <p>{{ explanation }}</p>
   </div>
@@ -14,7 +14,7 @@ import { key } from "../../key";
 export default {
   name: "Day",
   props: {
-    saveFav: Function,
+    handleFav: Function,
     day: Number,
     month: Number,
     year: Number
@@ -49,9 +49,7 @@ export default {
       value: "I am the DAY"
     };
   },
-  methods: {
-    addToFavorites() {}
-  }
+  methods: {}
 };
 </script>
 
