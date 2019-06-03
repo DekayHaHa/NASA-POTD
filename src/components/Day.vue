@@ -39,6 +39,7 @@ export default {
         this.isLoading = false;
         const { date, explanation, title, url, media_type } = response.data;
         // const daysInfo = { date, explanation, title, url, media: media_type };
+        // use for saving fetched data to reduce API calls
         this.date = date;
         this.explanation = explanation;
         this.title = title;
