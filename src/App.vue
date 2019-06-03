@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div>
-      <h1>NASA PICTURES BY DAY</h1>
+      <router-link to="/">
+        <h1>NASA PICTURES BY DAY</h1>
+      </router-link>
     </div>
     <router-view/>
   </div>
