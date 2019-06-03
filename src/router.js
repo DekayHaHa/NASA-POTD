@@ -11,12 +11,14 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'calendar',
-      component: Calendar
+      component: Calendar,
+      props: true
     },
     {
       path: '/day/:id',
       name: 'day',
-      component: Day
+      component: Day,
+      props: true
     }
   ]
 })
