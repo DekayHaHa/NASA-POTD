@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>I'm the calendar</h2>
-    <div v-for="date in days" :key="date.day">
+    <div v-for="date in dates" :key="date.day">
       <div v-on:click="() => renderDay(date)">
         <h3>{{date.day}}</h3>
       </div>
@@ -12,9 +12,12 @@
 <script>
 export default {
   name: "calendar",
+  props: {
+    favorites: Array
+  },
   data() {
     return {
-      days: []
+      dates: []
     };
   },
   mounted() {
@@ -23,7 +26,7 @@ export default {
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
     for (let i = 1; i <= day; i++) {
-      this.days.push({ year, month, day: i });
+      this.dates.push({ year, month, day: i });
     }
   },
   methods: {
