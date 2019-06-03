@@ -1,10 +1,19 @@
 <template>
   <div>
-    <h3>{{ title }}</h3>
-    <p>{{ date }}</p>
-    <button type="button" @click="handleFav(day)">Favorite</button>
-    <img :src="url">
-    <p>{{ explanation }}</p>
+    <div v-if="error">
+      <h3>{{error}}</h3>
+    </div>
+    <div v-else-if="isLoading">
+      <p>Loading...</p>
+      <img src="../assests/NASALOGO.gif">
+    </div>
+    <div v-else>
+      <h3>{{ title }}</h3>
+      <p>{{ date }}</p>
+      <button type="button" @click="handleFav(day)">Favorite</button>
+      <img :src="url">
+      <p>{{ explanation }}</p>
+    </div>
   </div>
 </template>
 
@@ -21,11 +30,13 @@ export default {
   },
   mounted() {
     const { year, month, day } = this;
+    this.isLoading = true;
     axios({
       method: "GET",
       url: `https://api.nasa.gov/planetary/apod?api_key=${key}&date=${year}-${month}-${day}`
     }).then(
       response => {
+        this.isLoading = false;
         const { date, explanation, title, url, media_type } = response.data;
         // const daysInfo = { date, explanation, title, url, media: media_type };
         this.date = date;
@@ -35,7 +46,7 @@ export default {
         this.media = media_type;
       },
       error => {
-        console.error(error);
+        this.error = error;
       }
     );
   },
@@ -46,7 +57,8 @@ export default {
       title: "",
       url: "",
       media: "",
-      value: "I am the DAY"
+      isLoading: false,
+      error: ""
     };
   },
   methods: {}
