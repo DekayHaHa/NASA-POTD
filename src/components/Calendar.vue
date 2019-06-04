@@ -1,10 +1,14 @@
 <template>
-  <section>
-    <h2>Pick a day for {{currentMonth}}</h2>
-    <div v-for="date in dates" :key="date.day">
-      <div v-on:click="() => renderDay(date)">
-        <h3 v-if="favorites.days.includes(date.day)" class="favorite-day">{{date.day}}</h3>
-        <h3 v-else>{{date.day}}</h3>
+  <section class="calendar">
+    <h2 class="headline">Days for {{currentMonth}}</h2>
+    <div class="container">
+      <div
+        v-for="date in dates"
+        :key="date.day"
+        v-on:click="() => renderDay(date)"
+        :class="checkFav(favorites, date)"
+      >
+        <h3>{{date.day}}</h3>
       </div>
     </div>
   </section>
@@ -32,6 +36,9 @@ export default {
     }
   },
   methods: {
+    checkFav(favorites, date) {
+      return `box ${favorites.days.includes(date.day)}`;
+    },
     renderDay({ year, month, day }) {
       const favorite = this.favorites.days.includes(day) ? true : false;
       const params = { id: day, day, month, year, favorite };
