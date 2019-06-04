@@ -87,6 +87,7 @@ html {
 .favs-btn {
   font-size: 24px;
 }
+
 .route {
   margin: auto 0px;
   text-decoration: none;
@@ -124,6 +125,7 @@ h2 {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 h3 {
   margin: 35px 0px 0px 0px;
 }
@@ -131,6 +133,7 @@ h3 {
 .box:hover {
   cursor: pointer;
 }
+
 .box {
   border: 2px solid #fffff4;
   border-radius: 25px;
