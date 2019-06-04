@@ -1,4 +1,4 @@
-# MyCommute
+# NASA-POTD 
 A web app that provides users with the ability to view and save their favorite Astronomy Picture of the Day from NASA. This app was a mock take home challenge in a language I didn't know. Started June 1st finshed June 4th.
 
 - Devin Kapla - [GitHub](https://github.com/DekayHaHa) - [LinkedIn](https://www.linkedin.com/in/devinkapla/)
