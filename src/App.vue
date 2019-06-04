@@ -1,10 +1,8 @@
 <template>
   <div id="app">
-    <div>
-      <router-link to="/">
-        <h1>NASA PICTURES BY DAY</h1>
-      </router-link>
-      <router-link to="/favorites">Vue Favs</router-link>
+    <div class="header">
+      <router-link class="route title" to="/" exact>NASA PICTURES BY DAY</router-link>
+      <router-link class="route favs-btn" to="/favorites" exact>Vue Favs</router-link>
     </div>
     <router-view
       v-bind:handleFav="handleFav"
@@ -35,7 +33,7 @@ export default {
     ];
     this.currentMonth = months.find((mnth, ind) => ind == month - 1);
     const savedFavs = JSON.parse(localStorage.getItem("favoriteDates"));
-    if (savedFavs && today.getMonth() + 1 == savedFavs.monthSaved) {
+    if (savedFavs && this.currentMonth == savedFavs.monthSaved) {
       return (this.favorites = savedFavs);
     } else if (savedFavs && savedFavs.monthSaved != this.currentMonth) {
       localStorage.removeItem("favoriteDates");
@@ -65,12 +63,38 @@ export default {
 </script>
  
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  background: #5c00bf;
+  color: #1f0040;
+}
+
+.favorite-day {
+  color: gold;
+}
+
+.title {
+  font-size: 36px;
+}
+.route {
+  margin: auto 5%;
+  text-decoration: none;
+  color: #1f0040;
+}
+
+.header {
+  height: 120px;
+  background: #7b00ff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.router-link-exact-active {
+  border-bottom: 2px solid #1f0040;
 }
 </style>

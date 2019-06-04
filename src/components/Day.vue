@@ -1,16 +1,17 @@
 <template>
   <div>
-    <div v-if="error">
+    <div v-if="error" class="error">
       <h3>{{error}}</h3>
     </div>
-    <div v-else-if="isLoading">
-      <p>Loading...</p>
+    <div v-else-if="isLoading" class="loading">
       <img src="../assests/NASALOGO.gif">
+      <p>Loading...</p>
     </div>
     <div v-else>
       <h3>{{ title }}</h3>
       <p>{{ date }}</p>
-      <button type="button" @click="handleFav(day)">Favorite</button>
+      <button v-if="!isFav" type="button" @click="handleClick(day)">Favorite</button>
+      <button v-else type="button" @click="handleClick(day)">Unfavorite</button>
       <img :src="url">
       <p>{{ explanation }}</p>
     </div>
@@ -26,9 +27,11 @@ export default {
     handleFav: Function,
     day: Number,
     month: Number,
-    year: Number
+    year: Number,
+    favorite: Boolean
   },
   mounted() {
+    this.isFav = this.favorite;
     const { year, month, day } = this;
     this.isLoading = true;
     axios({
@@ -59,12 +62,23 @@ export default {
       url: "",
       media: "",
       isLoading: false,
-      error: ""
+      error: "",
+      isFav: false
     };
   },
-  methods: {}
+  methods: {
+    handleClick: function(day) {
+      this.isFav = !this.isFav;
+      this.handleFav(day);
+    }
+  }
 };
 </script>
 
-<style>
+<style scoped>
+.loading,
+.error {
+  padding-top: 10%;
+  text-align: center;
+}
 </style>

@@ -3,7 +3,7 @@
     <h2>Favorites for {{currentMonth}}</h2>
     <div v-for="fav in favorites.days" :key="fav">
       <div v-on:click="() => renderDay(fav)">
-        <h3>{{fav}}</h3>
+        <h3 class="favorite-day">{{fav}}</h3>
       </div>
     </div>
   </section>
@@ -21,7 +21,8 @@ export default {
       const today = new Date();
       const year = today.getFullYear();
       const month = today.getMonth() + 1;
-      const params = { id: day, day, month, year };
+      const favorite = this.favorites.days.includes(day) ? true : false;
+      const params = { id: day, day, month, year, favorite };
       this.$router.push({ name: "day", params });
     }
   }
