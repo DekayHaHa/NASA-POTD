@@ -15,7 +15,7 @@
         <button v-else type="button" @click="handleClick(day)" class="fav-btn">Unfavorite</button>
       </div>
       <div class="img-cap">
-        <a v-if="media != 'image'" :href="url">
+        <a v-if="media != 'image'" :href="url" class="video" target="_blank">
           <img src="../assests/NASALOGO.gif" alt="NASA Logo">
           <p>Click to view {{media}}</p>
         </a>
@@ -47,7 +47,6 @@ export default {
       url: `https://api.nasa.gov/planetary/apod?api_key=${key}&date=${year}-${month}-${day}`
     }).then(
       response => {
-        this.isLoading = false;
         const { date, explanation, title, url, media_type } = response.data;
         // const daysInfo = { date, explanation, title, url, media: media_type };
         // use for saving fetched data to reduce API calls
@@ -56,6 +55,7 @@ export default {
         this.title = title;
         this.url = url;
         this.media = media_type;
+        this.isLoading = false;
       },
       error => {
         this.error = error;
@@ -115,5 +115,18 @@ export default {
 .error {
   padding-top: 10%;
   text-align: center;
+}
+
+a {
+  color: #fffff4;
+  text-decoration: none;
+}
+
+.video {
+  text-align: center;
+}
+
+div > a > img {
+  width: 100%;
 }
 </style>
