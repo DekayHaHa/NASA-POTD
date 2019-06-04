@@ -1,16 +1,17 @@
 <template>
   <div>
-    <div v-if="error">
+    <div v-if="error" class="error">
       <h3>{{error}}</h3>
     </div>
-    <div v-else-if="isLoading">
-      <p>Loading...</p>
+    <div v-else-if="isLoading" class="loading">
       <img src="../assests/NASALOGO.gif">
+      <p>Loading...</p>
     </div>
     <div v-else>
       <h3>{{ title }}</h3>
       <p>{{ date }}</p>
-      <button type="button" @click="handleFav(day)">Favorite</button>
+      <button v-if="favorite" type="button" @click="handleFav(day)">Favorite</button>
+      <button v-else type="button" @click="handleFav(day)">Unfavorite</button>
       <img :src="url">
       <p>{{ explanation }}</p>
     </div>
@@ -26,7 +27,8 @@ export default {
     handleFav: Function,
     day: Number,
     month: Number,
-    year: Number
+    year: Number,
+    favorite: Boolean
   },
   mounted() {
     const { year, month, day } = this;
@@ -36,6 +38,7 @@ export default {
       url: `https://api.nasa.gov/planetary/apod?api_key=${key}&date=${year}-${month}-${day}`
     }).then(
       response => {
+        console.log(response);
         this.isLoading = false;
         const { date, explanation, title, url, media_type } = response.data;
         // const daysInfo = { date, explanation, title, url, media: media_type };
@@ -47,6 +50,7 @@ export default {
         this.media = media_type;
       },
       error => {
+        console.log(error);
         this.error = error;
       }
     );
@@ -66,5 +70,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.loading,
+.error {
+  padding-top: 10%;
+  text-align: center;
+}
 </style>
