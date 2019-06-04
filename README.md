@@ -1,29 +1,22 @@
-# nasa-pics
+# MyCommute
+A web app that provides users with the ability to view and save their favorite Astronomy Picture of the Day from NASA. This app was a mock take home challenge in a language I didn't know. Started June 1st finshed June 4th.
 
-## Project setup
-```
-npm install
-```
+- Devin Kapla - [GitHub](https://github.com/DekayHaHa) - [LinkedIn](https://www.linkedin.com/in/devinkapla/)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Tech Stack
+- CSS
+- Vue
+- Vue Router
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Install Instructions
+- Clone down this repo
+- NPM install
+- NPM run serve
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Moving Forward
+Priorites
+- 1 Fix deployment issues
+- 2 Add Today.vue and make it home '/' route
+- 3 Save APi data locally to reduce API calls and time 
+- 4 Use current month calendar with disabled future dates
+- 5 Allow for embed videos
