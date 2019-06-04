@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="day">
     <div v-if="error" class="error">
       <h3>{{error}}</h3>
     </div>
@@ -8,12 +8,20 @@
       <p>Loading...</p>
     </div>
     <div v-else>
-      <h3>{{ title }}</h3>
-      <p>{{ date }}</p>
-      <button v-if="!isFav" type="button" @click="handleClick(day)">Favorite</button>
-      <button v-else type="button" @click="handleClick(day)">Unfavorite</button>
-      <img :src="url">
-      <p>{{ explanation }}</p>
+      <div class="title-date">
+        <p class="img-title">{{ title }}</p>
+        <p>{{ date }}</p>
+        <button v-if="!isFav" type="button" @click="handleClick(day)" class="fav-btn">Favorite</button>
+        <button v-else type="button" @click="handleClick(day)" class="fav-btn">Unfavorite</button>
+      </div>
+      <div class="img-cap">
+        <a v-if="media != 'image'" :href="url">
+          <img src="../assests/NASALOGO.gif" alt="NASA Logo">
+          <p>Click to view {{media}}</p>
+        </a>
+        <img v-else :src="url">
+        <p class="cap">{{ explanation }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -76,6 +84,33 @@ export default {
 </script>
 
 <style scoped>
+.day {
+  color: #fffff4;
+}
+.title-date {
+  padding: 10px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img-cap > img {
+  width: 100%;
+}
+.img-cap {
+  padding: 0px 60px 0px 60px;
+  margin: auto;
+}
+
+.fav-btn {
+  width: 100px;
+  height: 25px;
+  border-radius: 25px;
+  font-size: 1em;
+  border: 2px solid #fffff4;
+  color: #fffff4;
+  background: none;
+}
 .loading,
 .error {
   padding-top: 10%;
