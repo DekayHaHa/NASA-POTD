@@ -34,7 +34,6 @@ export default {
   methods: {
     renderDay({ year, month, day }) {
       const favorite = this.favorites.days.includes(day) ? true : false;
-      console.log(favorite);
       const params = { id: day, day, month, year, favorite };
       this.$router.push({ name: "day", params });
     }

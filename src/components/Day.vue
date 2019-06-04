@@ -10,8 +10,8 @@
     <div v-else>
       <h3>{{ title }}</h3>
       <p>{{ date }}</p>
-      <button v-if="favorite" type="button" @click="handleFav(day)">Favorite</button>
-      <button v-else type="button" @click="handleFav(day)">Unfavorite</button>
+      <button v-if="!isFav" type="button" @click="handleClick(day)">Favorite</button>
+      <button v-else type="button" @click="handleClick(day)">Unfavorite</button>
       <img :src="url">
       <p>{{ explanation }}</p>
     </div>
@@ -31,6 +31,7 @@ export default {
     favorite: Boolean
   },
   mounted() {
+    this.isFav = this.favorite;
     const { year, month, day } = this;
     this.isLoading = true;
     axios({
@@ -38,7 +39,6 @@ export default {
       url: `https://api.nasa.gov/planetary/apod?api_key=${key}&date=${year}-${month}-${day}`
     }).then(
       response => {
-        console.log(response);
         this.isLoading = false;
         const { date, explanation, title, url, media_type } = response.data;
         // const daysInfo = { date, explanation, title, url, media: media_type };
@@ -50,7 +50,6 @@ export default {
         this.media = media_type;
       },
       error => {
-        console.log(error);
         this.error = error;
       }
     );
@@ -63,10 +62,16 @@ export default {
       url: "",
       media: "",
       isLoading: false,
-      error: ""
+      error: "",
+      isFav: false
     };
   },
-  methods: {}
+  methods: {
+    handleClick: function(day) {
+      this.isFav = !this.isFav;
+      this.handleFav(day);
+    }
+  }
 };
 </script>
 
